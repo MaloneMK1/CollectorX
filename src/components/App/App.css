@@ -1,0 +1,30 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 100vh;
+  margin: 0 auto;
+  padding: 0 24px;
+  overflow-wrap: anywhere;
+}
+
+.app__skip-link {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  padding: 8px 12px;
+  color: #fff;
+  background-color: #202c3a;
+  transform: translateY(-200%);
+}
+
+.app__skip-link:focus {
+  transform: translateY(0);
+}
+
+@media screen and (max-width: 480px) {
+  .app {
+    padding: 0 16px;
+  }
+}

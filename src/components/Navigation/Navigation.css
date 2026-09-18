@@ -1,0 +1,28 @@
+.navigation__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.navigation__link {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: #405066;
+  text-decoration: none;
+}
+
+.navigation__link:hover {
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
+
+.navigation__link_active {
+  color: #184c82;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+}
