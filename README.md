@@ -24,15 +24,18 @@ CollectorX Stage 1 allows users to:
 - View search results in groups of three using a **Show More** button.
 - See distinct loading, success, empty, and error states.
 - Navigate between the Discover and My Collection pages with React Router.
-- Open reusable Login and Register modals.
+- Register, log in, and log out through a frontend-only mock authentication flow.
+- Receive inline validation feedback from reusable controlled modal forms.
 - Use the application across screen sizes from desktop down to 320px.
 
 The search only runs when submitted rather than making an API request on every
 keystroke.
 
-Login and registration are presentation-only in Stage 1. The forms do not
-create accounts, authenticate users, transmit credentials, or store
-credentials.
+Login and registration are simulated in Stage 1 so reviewers can exercise the
+complete form flow. Any syntactically valid email and password of at least eight
+characters is accepted. Successful submission changes Login to Logout for the
+current browser session. The forms do not create accounts, contact a backend,
+transmit credentials, or persist credentials.
 
 My Collection, Grails, and Wishlist are also currently presentation or
 placeholder features. Persistent collection management, authentication,
@@ -85,6 +88,8 @@ src/
 |   |-- LoginModal/
 |   `-- RegisterModal/
 |-- images/
+|-- hooks/
+|   `-- useForm.js
 |-- utils/
 |   |-- constants.js
 |   `-- providers/
@@ -93,9 +98,10 @@ src/
     `-- fonts/
 ```
 
-Application-level search and modal state are managed by `App`. Reusable
-presentation components work with normalized collectible data rather than raw
-Rebrickable response fields.
+Application-level search, modal, and mock login state are managed by `App`.
+`useForm` provides reusable controlled values, validation errors, validity, and
+reset handling for both authentication forms. Presentation components work with
+normalized collectible data rather than raw Rebrickable response fields.
 
 ## Routes
 
@@ -141,7 +147,7 @@ The interface includes:
 - Visible focus states.
 - Descriptive image alternative text.
 - Accessible form labels.
-- Required email and password fields.
+- Controlled required email and password fields with inline validation.
 - Modal dialogs that can be closed with the close button, overlay, or Escape
   key.
 - Keyboard focus containment while a modal is open.
@@ -238,7 +244,7 @@ CollectorX is intended to grow beyond the Stage 1 frontend.
 
 Potential future development includes:
 
-- User authentication
+- Backend-connected user authentication
 - Persistent user accounts
 - Saved collections
 - Wishlist management

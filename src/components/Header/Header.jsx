@@ -3,7 +3,7 @@ import Navigation from '../Navigation/Navigation.jsx';
 import { ROUTE_PATHS } from '../../utils/constants.js';
 import './Header.css';
 
-function Header({ onLoginClick }) {
+function Header({ isLoggedIn, onLoginClick, onLogoutClick }) {
   return (
     <header className="header">
       <Link className="header__logo" to={ROUTE_PATHS.discover}>
@@ -11,8 +11,12 @@ function Header({ onLoginClick }) {
         <span className="header__logo-mark">X</span>
       </Link>
       <Navigation />
-      <button className="header__login" type="button" onClick={onLoginClick}>
-        Login
+      <button
+        className="header__login"
+        type="button"
+        onClick={isLoggedIn ? onLogoutClick : onLoginClick}
+      >
+        {isLoggedIn ? 'Logout' : 'Login'}
       </button>
     </header>
   );

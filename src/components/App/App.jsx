@@ -19,6 +19,7 @@ function App() {
   const [submittedSearchTerm, setSubmittedSearchTerm] = useState('');
   const [visibleResultCount, setVisibleResultCount] = useState(RESULTS_BATCH_SIZE);
   const [activeModal, setActiveModal] = useState(null);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const visibleSearchResults = searchResults.slice(0, visibleResultCount);
   const hasMoreSearchResults = visibleResultCount < searchResults.length;
@@ -61,12 +62,25 @@ function App() {
     setActiveModal(null);
   }
 
+  function handleMockAuthentication() {
+    setIsLoggedIn(true);
+    closeModal();
+  }
+
+  function handleLogout() {
+    setIsLoggedIn(false);
+  }
+
   return (
     <div className="app">
       <a className="app__skip-link" href="#main-content">
         Skip to main content
       </a>
-      <Header onLoginClick={openLoginModal} />
+      <Header
+        isLoggedIn={isLoggedIn}
+        onLoginClick={openLoginModal}
+        onLogoutClick={handleLogout}
+      />
       <Main
         searchResults={visibleSearchResults}
         isLoading={isLoading}
@@ -82,11 +96,13 @@ function App() {
         isOpen={activeModal === 'login'}
         onClose={closeModal}
         onOpenRegister={openRegisterModal}
+        onLogin={handleMockAuthentication}
       />
       <RegisterModal
         isOpen={activeModal === 'register'}
         onClose={closeModal}
         onOpenLogin={openLoginModal}
+        onRegister={handleMockAuthentication}
       />
     </div>
   );

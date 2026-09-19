@@ -1,6 +1,37 @@
 import ModalWithForm from '../ModalWithForm/ModalWithForm.jsx';
+import useForm from '../../hooks/useForm.js';
 
-function RegisterModal({ isOpen, onClose, onOpenLogin }) {
+const REGISTER_INITIAL_VALUES = {
+  email: '',
+  password: '',
+};
+
+function RegisterModal({ isOpen, onClose, onOpenLogin, onRegister }) {
+  const { values, errors, isValid, handleChange, resetForm } = useForm(
+    REGISTER_INITIAL_VALUES,
+  );
+
+  function handleClose() {
+    resetForm();
+    onClose();
+  }
+
+  function handleOpenLogin() {
+    resetForm();
+    onOpenLogin();
+  }
+
+  function handleSubmit(event) {
+    event.preventDefault();
+
+    if (!isValid) {
+      return;
+    }
+
+    resetForm();
+    onRegister();
+  }
+
   return (
     <ModalWithForm
       isOpen={isOpen}
@@ -9,8 +40,10 @@ function RegisterModal({ isOpen, onClose, onOpenLogin }) {
       submitText="Register"
       alternateText="Already have an account?"
       alternateButtonText="Login"
-      onAlternateClick={onOpenLogin}
-      onClose={onClose}
+      isSubmitDisabled={!isValid}
+      onAlternateClick={handleOpenLogin}
+      onClose={handleClose}
+      onSubmit={handleSubmit}
     >
       <label className="modal__field" htmlFor="register-email">
         <span className="modal__label">Email</span>
@@ -21,8 +54,15 @@ function RegisterModal({ isOpen, onClose, onOpenLogin }) {
           type="email"
           autoComplete="email"
           placeholder="collector@example.com"
+          value={values.email}
+          aria-describedby="register-email-error"
+          aria-invalid={Boolean(errors.email)}
+          onChange={handleChange}
           required
         />
+        <span className="modal__input-error" id="register-email-error">
+          {errors.email}
+        </span>
       </label>
       <label className="modal__field" htmlFor="register-password">
         <span className="modal__label">Password</span>
@@ -33,8 +73,16 @@ function RegisterModal({ isOpen, onClose, onOpenLogin }) {
           type="password"
           autoComplete="new-password"
           placeholder="Create a password"
+          minLength={8}
+          value={values.password}
+          aria-describedby="register-password-error"
+          aria-invalid={Boolean(errors.password)}
+          onChange={handleChange}
           required
         />
+        <span className="modal__input-error" id="register-password-error">
+          {errors.password}
+        </span>
       </label>
     </ModalWithForm>
   );

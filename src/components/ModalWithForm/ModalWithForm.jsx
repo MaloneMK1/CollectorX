@@ -12,11 +12,18 @@ function ModalWithForm({
   children,
   alternateText,
   alternateButtonText,
+  isSubmitDisabled,
   onAlternateClick,
   onClose,
+  onSubmit,
 }) {
   const modalRef = useRef(null);
+  const onCloseRef = useRef(onClose);
   const titleId = `${name}-modal-title`;
+
+  useEffect(() => {
+    onCloseRef.current = onClose;
+  }, [onClose]);
 
   useEffect(() => {
     if (!isOpen) {
@@ -30,7 +37,7 @@ function ModalWithForm({
 
     function handleKeyDown(event) {
       if (event.key === 'Escape') {
-        onClose();
+        onCloseRef.current();
         return;
       }
 
@@ -60,16 +67,12 @@ function ModalWithForm({
       document.removeEventListener('keydown', handleKeyDown);
       previouslyFocusedElement?.focus();
     };
-  }, [isOpen, onClose]);
+  }, [isOpen]);
 
   function handleOverlayMouseDown(event) {
     if (event.target === event.currentTarget) {
       onClose();
     }
-  }
-
-  function handleSubmit(event) {
-    event.preventDefault();
   }
 
   if (!isOpen) {
@@ -96,9 +99,13 @@ function ModalWithForm({
         <h2 className="modal__title" id={titleId}>
           {title}
         </h2>
-        <form className="modal__form" name={name} onSubmit={handleSubmit}>
+        <form className="modal__form" name={name} noValidate onSubmit={onSubmit}>
           {children}
-          <button className="modal__submit" type="submit">
+          <button
+            className="modal__submit"
+            type="submit"
+            disabled={isSubmitDisabled}
+          >
             {submitText}
           </button>
         </form>
