@@ -1,7 +1,6 @@
-# ModalWithForm (planned)
+# ModalWithForm
 
-Reserved for the shared form dialog used by LoginModal and RegisterModal.
-When implemented, it must include accessible naming, keyboard dismissal,
-focus containment, and focus restoration.
-
-No modal, form handling, or authentication is implemented in this stage.
+Reusable accessible dialog and form shell used by LoginModal and RegisterModal.
+It handles the close button, guarded overlay dismissal, Escape dismissal, focus
+containment, focus restoration, and listener cleanup. Form submission is
+intentionally prevented until authentication is implemented in a later stage.

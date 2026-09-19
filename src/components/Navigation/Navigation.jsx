@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router';
-import { routePaths } from '../../utils/constants.js';
+import { ROUTE_PATHS } from '../../utils/constants.js';
 import './Navigation.css';
 
 function getLinkClassName({ isActive }) {
@@ -13,13 +13,23 @@ function Navigation() {
     <nav className="navigation" aria-label="Main navigation">
       <ul className="navigation__list">
         <li className="navigation__item">
-          <NavLink to={routePaths.discover} end className={getLinkClassName}>
-            Discover
+          <button className="navigation__placeholder" type="button" disabled>
+            Grails
+          </button>
+        </li>
+        <li className="navigation__item">
+          <button className="navigation__placeholder" type="button" disabled>
+            Wishlist
+          </button>
+        </li>
+        <li className="navigation__item">
+          <NavLink to={ROUTE_PATHS.collection} className={getLinkClassName}>
+            My collection
           </NavLink>
         </li>
         <li className="navigation__item">
-          <NavLink to={routePaths.collection} className={getLinkClassName}>
-            My collection
+          <NavLink to={ROUTE_PATHS.discover} end className={getLinkClassName}>
+            Discover
           </NavLink>
         </li>
       </ul>

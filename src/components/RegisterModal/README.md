@@ -1,6 +1,4 @@
-# RegisterModal (planned)
+# RegisterModal
 
-Reserved for the future registration form built with ModalWithForm.
-Authentication requires explicit approval for a later stage.
-
-No registration fields, account creation, or authentication requests exist yet.
+Frontend-only email and password form built with ModalWithForm. It can switch to
+LoginModal but does not store credentials or create an account.

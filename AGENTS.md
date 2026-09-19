@@ -34,9 +34,14 @@ These rules apply to all work in this repository.
 
 The MVP supports only LEGO sets through Rebrickable, the first planned collectible provider. Keep the application structure generic without implementing additional providers.
 
-The current stage is frontend setup only: React/Vite, the application shell, routes for `/` and `/collection`, and documented folders for future components and the Rebrickable integration. Search, collection management, and modal features remain unimplemented. The collection will eventually use frontend state before becoming a protected route when authentication is connected.
+Stage 1 includes the React/Vite application shell, routes for `/` and
+`/collection`, live Rebrickable LEGO-set search, loading/empty/error states,
+local Show More batching, and frontend-only Login and Register modals. Search
+state and modal state are coordinated in App. Rebrickable request construction
+and normalization remain isolated in the provider utility layer.
 
-- Do not connect to Rebrickable, request or create an API key, or create fake credentials.
+- Do not expose, log, hard-code, or commit the Rebrickable API key.
+- Do not implement real authentication or store credentials in the Stage 1 modal forms.
 - Do not implement the Express backend, MongoDB/Mongoose infrastructure, or JWT authentication yet.
 - Do not deploy or create external service accounts.
 - Do not add comics, trading cards, games, action figures, pricing, valuation, marketplace functionality, or other collectible categories.

@@ -1,7 +1,9 @@
-# CollectibleCard (planned)
+# CollectibleCard
 
-Reserved for presenting one collectible supplied through props.
-Keep the component name and props generic; provider response fields will be
-translated in the provider utility layer before reaching the UI.
+Reusable presentation component for one generic collectible supplied through
+props. It displays a provider image when available and otherwise uses the local
+CSS brick placeholder, which does not use franchise artwork or logos.
 
-No card layout, data contract, or collection actions are implemented yet.
+Provider response fields are translated into its generic data shape by the
+provider utility layer. Collection actions remain out of scope until their
+functionality is implemented.

@@ -1,6 +1,4 @@
-# LoginModal (planned)
+# LoginModal
 
-Reserved for the future login form built with ModalWithForm.
-Authentication requires explicit approval for a later stage.
-
-No login fields, credential handling, or authentication requests exist yet.
+Frontend-only email and password form built with ModalWithForm. It can switch to
+RegisterModal but does not store credentials or perform authentication.

@@ -1,14 +1,15 @@
-# Rebrickable integration (planned)
+# Rebrickable integration
 
-This folder reserves the first collectible provider integration: LEGO sets from
-Rebrickable. It contains no API implementation or credentials.
+This folder contains the first collectible provider integration: LEGO sets from
+Rebrickable. Provider request details stay here so generic CollectorX components
+do not depend on Rebrickable response fields.
 
-When this stage is approved, request functions using vanilla `fetch()` and any
-translation from provider responses to generic collectible data belong here.
-Components should receive generic data and should not depend on Rebrickable's
-response fields. Define the data shape when the integration is actually built.
+`rebrickableApi.js` uses vanilla `fetch()` and reads the API key from
+`import.meta.env.VITE_REBRICKABLE_API_KEY`. The local `.env` file is ignored by
+Git and must never be committed. Because Vite embeds `VITE_` variables into the
+browser bundle, this value is client-visible and is not a server-side secret.
 
-Do not add other providers, a provider registry, API keys, or network requests
-during initial setup. Configuration should have one home in the utility layer
-when it is needed. Values exposed to a frontend bundle are public, so a secret
-must never be placed in client-side code or a `VITE_` environment variable.
+The provider accepts a LEGO set search term, requests up to 100 matching sets in
+one controlled request, and normalizes Rebrickable fields into generic
+collectible objects. App reveals the returned objects locally in groups of three,
+so Show More does not generate repeated API requests.

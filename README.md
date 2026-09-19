@@ -1,102 +1,121 @@
 # CollectorX
 
-CollectorX is a TripleTen Software Engineering final project: a collection-management platform being built incrementally toward a full-stack application.
+CollectorX is a responsive collection-management application being developed as
+a TripleTen Software Engineering final project. Stage 1 focuses on discovering
+LEGO sets through the Rebrickable API. Other collectible providers, pricing,
+authentication, and persistence are outside the current scope.
 
-## MVP scope and current stage
+## Stage 1 functionality
 
-The MVP supports **LEGO sets only**. Rebrickable will be the first supported collectible data provider. Application-level components use generic names so future providers can be considered without making the application itself LEGO-specific. No additional providers or collectible categories are being implemented.
+- Search Rebrickable for LEGO sets without making a request on every keystroke.
+- Display normalized set images, names, numbers, years, and piece counts.
+- Show an accessible preloader while a search is pending.
+- Present distinct initial, loading, successful, empty, and error states.
+- Reveal successful results locally in groups of three with Show More.
+- Open reusable frontend-only Login and Register forms.
+- Navigate between Discover (`/`) and My Collection (`/collection`) with React Router.
+- Adapt the layout from desktop widths down to 320px.
 
-The current stage establishes the React frontend, shared page layout, navigation, and placeholder routes:
+Login and registration are presentation-only in Stage 1. The forms do not create
+accounts, authenticate users, send credentials, or store credentials. My
+Collection, Grails, and Wishlist are also not functional yet.
 
-| Route | Current behavior | Planned behavior |
-| --- | --- | --- |
-| `/` | Discover placeholder | Search and discover LEGO sets through Rebrickable |
-| `/collection` | Collection placeholder | Manage a collection using frontend state initially, then a protected route when backend authentication is connected |
+## Technology
 
-Search, collection management, forms, modals, API requests, backend services, and authentication are not implemented yet. Each next phase requires the project owner's explicit approval. Pricing, valuation, marketplace functionality, and other collectible categories are outside the approved MVP.
+- JavaScript and JSX
+- React and React DOM
+- React Router
+- Vite
+- Vanilla CSS using BEM class names
+- Vanilla `fetch()`
+- Rebrickable API
+- Oxlint
 
-## Technology stack
+No request library such as Axios or jQuery is used. Rebrickable-specific request
+construction and response normalization remain isolated in
+`src/utils/providers/rebrickable/`.
 
-**Installed now:** JavaScript, React, React DOM, React Router, Vite, the Vite React plugin, and Oxlint. Styling uses plain CSS with BEM class names.
+## Local setup
 
-**Planned for later stages:** vanilla `fetch()` with the Rebrickable API, Node.js and Express, MongoDB and Mongoose, and JWT authentication. No backend dependencies, database services, or authentication implementation have been added.
-
-The current official Vite React JavaScript template uses Oxlint, so the project retains that linter without adding ESLint or another linting stack. React Router is installed as `react-router` and uses its declarative routing APIs. Setup references: [Vite guide](https://vite.dev/guide/) and [React Router declarative installation](https://reactrouter.com/start/declarative/installation).
-
-## Local development
-
-Node.js **24.18.0** is the initial development baseline. Use npm from the project root:
+Install dependencies from the project root:
 
 ```sh
 npm install
+```
+
+Create a local `.env` file in the project root and add your own Rebrickable API
+key:
+
+```env
+VITE_REBRICKABLE_API_KEY=<your key>
+```
+
+Never commit the real key or the `.env` file. Vite exposes `VITE_` variables to
+browser code, so this value is client-visible and is not a server-side secret.
+
+Start the development server:
+
+```sh
 npm run dev
 ```
 
-Open the local URL printed by Vite. Other available commands:
+Open the local URL printed by Vite.
+
+## Validation and production build
 
 ```sh
-npm run build
 npm run lint
+npm run build
 npm run preview
 ```
 
-`build` produces the production frontend in `dist/`. `lint` checks the project with Oxlint and treats warnings as failures. Run `preview` after a build to serve that build locally; it does not deploy the application.
+The production build is written to `dist/`. `npm run preview` serves the existing
+build locally and does not deploy it.
 
 ## Project structure
 
 ```text
-CollectorX/
-|-- AGENTS.md
-|-- README.md
-|-- .gitignore
-|-- .oxlintrc.json
-|-- index.html
-|-- package.json
-|-- package-lock.json
-|-- vite.config.js
-|-- public/
-|   `-- favicon.svg
-`-- src/
-    |-- main.jsx
-    |-- index.css
-    |-- components/
-    |   |-- App/              # App.jsx and App.css
-    |   |-- Header/           # Header.jsx and Header.css
-    |   |-- Navigation/       # Navigation.jsx and Navigation.css
-    |   |-- Main/             # Main.jsx and Main.css
-    |   |-- Footer/           # Footer.jsx and Footer.css
-    |   |-- SearchForm/       # README.md only
-    |   |-- SearchResults/    # README.md only
-    |   |-- CollectibleCard/  # README.md only
-    |   |-- Preloader/        # README.md only
-    |   |-- ModalWithForm/    # README.md only
-    |   |-- LoginModal/       # README.md only
-    |   `-- RegisterModal/    # README.md only
-    `-- utils/
-        |-- constants.js
-        `-- providers/
-            `-- rebrickable/
-                `-- README.md
+src/
+|-- components/
+|   |-- App/
+|   |-- Header/
+|   |-- Navigation/
+|   |-- Main/
+|   |-- Footer/
+|   |-- SearchForm/
+|   |-- SearchResults/
+|   |-- CollectibleCard/
+|   |-- Preloader/
+|   |-- ModalWithForm/
+|   |-- LoginModal/
+|   `-- RegisterModal/
+|-- images/
+|-- utils/
+|   |-- constants.js
+|   `-- providers/rebrickable/
+`-- vendor/fonts/
 ```
 
-`src/main.jsx` mounts `App` inside `BrowserRouter` and React `StrictMode`. `App` composes `Header`, `Main`, and `Footer`; `Header` includes `Navigation`. `Main` defines the two primary routes and a fallback for unknown paths. Shared route paths live in `src/utils/constants.js` so navigation links and route definitions stay consistent.
+Application-level search and modal state live in `App`. Generic presentation
+components do not depend on raw Rebrickable response field names.
 
-Each implemented component has its own CSS file. `src/index.css` contains shared base styles. The shell includes semantic landmarks, an accessible navigation label, a skip link, and visible keyboard focus styles.
+## Fonts
 
-The seven component folders containing only a README document future responsibilities; they are not working components or imported stubs. `src/utils/providers/rebrickable/` similarly reserves the integration layer without implementing it. Future request functions and any conversion from provider responses to generic collectible data belong there, separate from UI components. No provider registry or additional provider implementation exists.
+CollectorX locally hosts Oi Regular and the Poppins weights used by the current
+design system (`400`, `600`, `700`, and `900`). Valid `@font-face` declarations
+live in `src/vendor/fonts/fonts.css`, which is loaded by `src/main.jsx`.
 
-## Configuration and secrets
+The WOFF2 files come from the official Google Fonts delivery service. Both
+families use the SIL Open Font License 1.1, and license copies are stored beside
+the font assets. No Google Fonts `<link>` tag or remote CSS `@import` is used.
 
-No `.env` file, API key, or credentials are needed for this stage. `.gitignore` excludes `.env`, `.env.*`, dependencies, build output, logs, and common local editor files.
+The local families are registered for staged visual adoption. Existing approved
+typography, including the Arial Black results headings, remains unchanged.
 
-Never commit secrets. Frontend `VITE_` environment variables are exposed in the client bundle and must not contain secret values. Configuration will be added in a shared utility module when an approved feature needs it.
+## Deployment
 
-Project rules and the current stage boundaries are documented in [AGENTS.md](./AGENTS.md).
+[View the deployed CollectorX application](https://malonemk1.github.io/CollectorX/).
 
-## Deployment link
+## Project pitch video
 
-To be added after deployment is explicitly approved and completed. The project is not deployed.
-
-## Pitch video
-
-To be added.
+**TODO:** Add the project pitch video link after it is recorded and uploaded.

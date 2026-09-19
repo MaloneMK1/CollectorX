@@ -1,7 +1,5 @@
-# SearchForm (planned)
+# SearchForm
 
-Reserved for a reusable collectible search form with an accessible label.
-It will pass the submitted query to its parent through a callback.
-API requests belong in utility modules, not this component.
-
-No search form or submission behavior is implemented in this stage.
+Reusable, accessible controlled search form for the Discover page. It prevents
+the browser's default submission and sends a trimmed, non-empty search term to
+its parent callback. The provider request remains outside the component.

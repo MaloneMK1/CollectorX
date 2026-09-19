@@ -1,6 +1,9 @@
-# SearchResults (planned)
+# SearchResults
 
-Reserved for displaying collectible search results using CollectibleCard.
-Its parent will supply results and request status. It will not fetch data itself.
+Reusable result grid that receives collectible data through props and renders
+CollectibleCard components. It presents loading, API error, zero-result, initial
+preview, and successful-result states supplied by its parent. Its heading reflects
+the active state and the submitted search term.
 
-No results rendering or request handling is implemented in this stage.
+It does not fetch data. For successful searches, it renders the App-controlled
+visible result slice and a Show More button while more normalized results remain.
