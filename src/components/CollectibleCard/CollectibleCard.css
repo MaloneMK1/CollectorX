@@ -1,0 +1,114 @@
+.collectible-card {
+  height: 100%;
+  color: #161616;
+  background-color: #fff;
+  border: 3px solid #161616;
+  box-shadow: 6px 6px 0 #161616;
+}
+
+.collectible-card__image {
+  display: grid;
+  min-height: 205px;
+  align-content: center;
+  justify-items: center;
+  gap: 8px;
+  padding: 24px;
+  background-color: #dbe8f2;
+  border-bottom: 3px solid #161616;
+}
+
+.collectible-card__photo {
+  display: block;
+  width: 100%;
+  height: 157px;
+  object-fit: contain;
+}
+
+.collectible-card__placeholder {
+  display: grid;
+  width: 100%;
+  align-content: center;
+  justify-items: center;
+  gap: 8px;
+}
+
+.collectible-card__brick {
+  position: relative;
+  height: 42px;
+  background-color: var(--collectible-accent);
+  border: 3px solid #161616;
+  box-shadow: 4px 4px 0 #161616;
+}
+
+.collectible-card__brick::before,
+.collectible-card__brick::after {
+  position: absolute;
+  top: -12px;
+  width: 18px;
+  height: 12px;
+  content: '';
+  background-color: var(--collectible-accent);
+  border: 3px solid #161616;
+  border-bottom: 0;
+}
+
+.collectible-card__brick::before {
+  left: 14px;
+}
+
+.collectible-card__brick::after {
+  right: 14px;
+}
+
+.collectible-card__brick_top {
+  width: 52%;
+}
+
+.collectible-card__brick_middle {
+  width: 76%;
+}
+
+.collectible-card__brick_bottom {
+  width: 94%;
+}
+
+.collectible-card__content {
+  display: flex;
+  flex-direction: column;
+  min-height: 170px;
+  padding: 22px;
+}
+
+.collectible-card__title {
+  margin: 0;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 27px;
+  font-weight: 900;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.collectible-card__details {
+  display: flex;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.collectible-card__detail {
+  display: grid;
+  gap: 2px;
+}
+
+.collectible-card__term {
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.collectible-card__value {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 700;
+}

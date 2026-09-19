@@ -1,0 +1,97 @@
+.main {
+  flex: 1;
+  padding: 40px 0 64px;
+}
+
+.discover-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 0.85fr);
+  gap: 32px;
+  padding: 44px;
+  color: #161616;
+  background-color: #ffd426;
+  border: 3px solid #161616;
+  box-shadow: 8px 8px 0 #161616;
+}
+
+.discover-hero__content {
+  max-width: 690px;
+}
+
+.discover-hero__eyebrow {
+  margin: 0 0 12px;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.discover-hero__title {
+  max-width: 650px;
+  margin: 0;
+  font-family: Impact, "Arial Black", sans-serif;
+  font-size: clamp(48px, 7vw, 88px);
+  font-weight: 900;
+  letter-spacing: 0.015em;
+  line-height: 0.94;
+  text-transform: uppercase;
+}
+
+.discover-hero__title-accent {
+  display: block;
+  color: #e63735;
+  text-shadow: 3px 3px 0 #161616;
+}
+
+.discover-hero__description {
+  max-width: 565px;
+  margin: 24px 0 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.main__section {
+  max-width: 640px;
+  padding: 32px;
+  color: #161616;
+  background-color: #fff;
+  border: 3px solid #161616;
+  box-shadow: 6px 6px 0 #161616;
+}
+
+.main__title {
+  margin: 0 0 16px;
+  font-size: 32px;
+  line-height: 1.2;
+}
+
+.main__description {
+  margin: 0;
+  color: #253c5a;
+}
+
+.main__link {
+  color: #184f9c;
+}
+
+@media screen and (max-width: 800px) {
+  .discover-hero {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .main {
+    padding: 28px 0 40px;
+  }
+
+  .discover-hero {
+    gap: 26px;
+    padding: 26px 20px;
+    box-shadow: 5px 5px 0 #161616;
+  }
+
+  .main__title {
+    font-size: 28px;
+  }
+}
